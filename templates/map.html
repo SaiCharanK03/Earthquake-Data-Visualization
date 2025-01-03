@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earthquake Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#map-section">Map</a></li>
+                <li><a href="#chart-section">Earthquake Metrics</a></li>
+                <li><a href="#tsunami-list-section">Tsunami Risk List</a></li>
+                <li><a href="#footer">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="map-section" class="map-container">
+            <h1>Interactive Earthquake Map</h1>
+            <div class="map-wrapper">
+                {{ map_html|safe }}
+            </div>
+        </section>
+
+        <section id="chart-section" class="chart-container">
+            <h2>Earthquake Metrics</h2>
+            <div id="chart">
+                {{ bar_chart_html|safe }}
+            </div>
+        </section>
+
+        <section id="tsunami-list-section" class="tsunami-container">
+            <h2>Places Potentially at Risk of Tsunamis</h2>
+            <ul class="tsunami-list">
+                {% if tsunami_list %}
+                    {% for place in tsunami_list %}
+                    <li>{{ place }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>None</li>
+                {% endif %}
+            </ul>
+        </section>
+    </main>
+
+    <footer id ="footer" class="main-footer">
+        <div class="main-container"> 
+            <div class="main-footer__upper">
+                <div class="main-footer__row main-footer__row-1">
+                    <h2 class="heading heading-sm main-footer__heading-sm"><span>Social</span></h2>
+                    <div class="main-footer__social-cont">
+                        <a target="_blank" rel="noreferrer" href="https://linkedin.com/in/saicharankattamreddy">
+                            <img class="main-footer__icon" src="{{ url_for('static', filename='linkedin-ico.png') }}" alt="Sai Charan Linkedin Profile" />
+                        </a>
+                        <a target="_blank" rel="noreferrer" href="https://github.com/SaiCharanK03">
+                            <img class="main-footer__icon" src="{{ url_for('static', filename='github-ico.png') }}" alt="SaiCharanK03 Github Profile" />
+                        </a>
+                        <a target="_blank" rel="noreferrer" href="https://www.youtube.com/channel/@ece-1046">
+                            <img class="main-footer__icon main-footer__icon--mr-none" src="{{ url_for('static', filename='yt-ico.png') }}" alt="ece_1046 Youtube Channel" />
+                        </a>
+                    </div>
+                </div>
+                <div class="main-footer__row main-footer__row-2">
+                    <h2 class="heading heading-sm text-lt">Sai Charan</h2>
+                    <p class="main-footer__short-desc">An aspiring BTech Electronics and Communication Engineering Student.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
